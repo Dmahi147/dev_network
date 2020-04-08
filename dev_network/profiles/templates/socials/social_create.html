@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+{% if profile.social %}
+  <div>
+    <p class='lead'>You have a social page</p>
+    <a class='btn btn-primary' href="{{profile.social.get_absolute_url}}">CHECK MY SOCIAL PAGE</a>
+  </div>
+{% else %}
+<div class="social-create" style="width: 60%; margin:auto">
+  <header class="page-header d-flex">
+    <h3 class="page-heading">Create Social Page</h3>
+  </header>
+  <hr>
+  <div class="social-create-form">
+    <form action="" method="POST"> {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-success btn-lg">CREATE SOCIAL PAGE</button>
+    </form>
+  </div>
+</div>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="profiles-list">
+  <header class="page-header d-flex">
+    <h3 class="page-heading m-0">Developers</h3>
+    {% if user.is_authenticated and not user.profile %}
+    <a href="/dev/profiles/create/" class="btn btn-primary">
+      CREATE PROFILE!
+    </a>
+    {% endif %}
+  </header>
+  <hr>
+  {% if not profiles.exists %}
+  <p class="lead text-muted">No profiles found yet..</p>
+  {% else %}
+  {% for profile in profiles %}
+  <div class="card card-posts my-2">
+    <div class="card-body d-flex">
+      <div class="card-left">
+        <p class="lead m-0">{{profile.name}}</p>
+        <small class="text-muted">From: {{profile.location}}</small>
+      </div>
+      <div class="card-center">
+        <p class="m-0 text-muted">{{profile.profession}}</p>
+      </div>
+      <div class="card-right">
+        <a href="{{profile.get_absolute_url}}" class="btn btn-outline-primary">CHECK</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+{% endblock content %}
